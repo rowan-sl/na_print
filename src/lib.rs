@@ -4,7 +4,7 @@
 ///
 /// this contains the actual write fn that is used, so it can be used for other things in users libs
 pub mod internal {
-    use std::{io, cmp};
+    use std::io;
     use libc::{write, c_int, c_void};
 
     // The maximum read limit on most POSIX-like systems is `SSIZE_MAX`,
@@ -30,8 +30,8 @@ pub mod internal {
     ///
     #[cfg(unix)]
     pub unsafe fn write_all(fd: c_int, buf: &[u8]) -> io::Result<()> {
-        debug_assert!(buf.len() <= READ_LIMIT, "writing more than {} bytes is unspecified behavior!", READ_LIMIT);
-        let mut remaining = cmp::min(buf.len(), READ_LIMIT);
+        assert!(buf.len() <= READ_LIMIT, "writing more than {} bytes is unspecified behavior!", READ_LIMIT);
+        let mut remaining = buf.len();
         loop {
             let res = write(fd, buf[buf.len() - remaining..].as_ptr() as *const c_void, remaining);
             if res < 0 {
