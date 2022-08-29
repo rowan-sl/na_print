@@ -1,0 +1,16 @@
+[package]
+name = "na_print"
+version = "0.1.0"
+edition = "2021"
+authors = ["Rowan S-L <r@fawkes.io>"]
+license = "MIT"
+description = "Printing without allocations and other tools for debugging allocators"
+homepage = "https://github.com/rowan-sl/na_print"
+repository = "https://github.com/rowan-sl/na_print"
+publish = true
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+libc = "0.2.132"
+
+[build-dependencies]
