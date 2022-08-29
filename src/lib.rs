@@ -63,3 +63,10 @@ pub fn print(txt: &str) {
 pub fn eprint(txt: &str) {
     print_to(libc::STDERR_FILENO, txt);
 }
+
+#[cfg(all(test, unix))]
+#[test]
+fn it_works() {
+    print("Hello, World!");
+    eprint("oh no");
+}
