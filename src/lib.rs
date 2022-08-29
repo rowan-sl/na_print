@@ -57,11 +57,27 @@ pub fn print(txt: &str) {
     print_to(libc::STDOUT_FILENO, txt);
 }
 
+/// [`print`], but prints a trailing newline
+#[cfg(unix)]
+#[inline(always)]
+pub fn println(txt: &str) {
+    print(txt);
+    print("\n");
+}
+
 /// Prints `txt` to stderr. for mor info, see [`print`]
 #[cfg(unix)]
 #[inline(always)]
 pub fn eprint(txt: &str) {
     print_to(libc::STDERR_FILENO, txt);
+}
+
+/// [`eprint`], but prints a trailing newline
+#[cfg(unix)]
+#[inline(always)]
+pub fn eprintln(txt: &str) {
+    print(txt);
+    print("\n");
 }
 
 #[cfg(all(test, unix))]
